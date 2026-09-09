@@ -30,7 +30,11 @@
   }
 
   *{box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
+  html{
+    scroll-behavior:smooth;
+    -webkit-text-size-adjust:100%;
+    text-size-adjust:100%;
+  }
   @media (prefers-reduced-motion: reduce){
     html{scroll-behavior:auto;}
     *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important;}
@@ -42,6 +46,7 @@
     color:var(--ink);
     background:var(--white);
     -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
   }
 
   a{color:inherit;}
@@ -115,12 +120,14 @@
     font-weight:700;
     font-size:14px;
     padding:11px 20px;
+    min-height:44px;
     border-radius:999px;
     border:2px solid var(--blue-700);
     background:var(--blue-700);
     color:var(--white);
     cursor:pointer;
     text-decoration:none;
+    -webkit-tap-highlight-color:transparent;
     transition:transform .15s ease, background .15s ease, color .15s ease;
   }
   .btn:hover{background:var(--blue-900); border-color:var(--blue-900); transform:translateY(-1px);}
@@ -419,6 +426,7 @@
   /* ---------- COMPARE TABLE ---------- */
   .compare-wrap{
     overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
     border:1px solid var(--line);
     border-radius:var(--radius);
   }
@@ -503,6 +511,33 @@
   table.compare td.col-active .yes{color:var(--blue-900);}
   table.compare td.col-active.is-platinum .yes{color:var(--green-dark);}
   table.compare .dash{color:var(--blue-200);}
+  /* Sticky row-label column: stays visible while swiping sideways on mobile */
+  table.compare thead th:first-child,
+  table.compare tbody th{
+    position:-webkit-sticky;
+    position:sticky;
+    left:0;
+    z-index:2;
+    background:var(--white);
+    box-shadow:1px 0 0 0 var(--line), 10px 0 12px -10px rgba(10,61,87,0.45);
+  }
+  table.compare thead th:first-child{
+    background:var(--blue-50);
+    z-index:3;
+  }
+  .swipe-hint{
+    display:none;
+    font-family:var(--font-mono);
+    font-size:11px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    margin:12px 2px 0;
+    text-align:right;
+  }
+  @media (max-width: 840px){
+    .swipe-hint{display:block;}
+  }
 
   /* ---------- STICKY SELECTION BAR ---------- */
   .selectbar{
@@ -513,6 +548,7 @@
     color:var(--white);
     transform:translateY(110%);
     transition:transform .3s ease;
+    padding-bottom:env(safe-area-inset-bottom);
   }
   .selectbar.show{transform:translateY(0);}
   .selectbar-inner{
@@ -670,12 +706,18 @@
     nav.site-nav{display:none;}
     .wrap, .stats-inner, .ribbon-inner{padding-left:18px; padding-right:18px;}
     .hero{padding:56px 0 40px;}
+    .hero p.lede{font-size:16px;}
     .section{padding:60px 0;}
     .stats-inner{grid-template-columns:repeat(2,1fr);}
     .stat{border-left:none !important; border-top:1px solid var(--line); padding:22px 4px;}
     .stat:first-child, .stat:nth-child(2){border-top:none;}
     .tiers-grid{grid-template-columns:1fr;}
+    .tier-card{-webkit-tap-highlight-color:transparent;}
     .footer-top{flex-direction:column;}
+    .footer-links .btn{width:100%; justify-content:center;}
+    .selectbar-inner{padding:14px 18px; gap:10px 14px;}
+    .selectbar-tier{font-size:19px; margin-left:8px;}
+    .selectbar-inner .btn{width:100%; justify-content:center; padding-top:13px; padding-bottom:13px;}
   }
 </style>
 </head>
@@ -777,6 +819,7 @@
         <tbody id="compareBody"></tbody>
       </table>
     </div>
+    <p class="swipe-hint" aria-hidden="true">Swipe to compare &rarr;</p>
   </div>
 </section>
 
