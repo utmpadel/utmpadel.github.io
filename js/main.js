@@ -1,4 +1,7 @@
 (function(){
+  // Changing this address — or moving the site to a new domain — appears to
+  // require a fresh FormSubmit activation click before submissions are
+  // delivered again. Re-test the form end to end after either change.
   var EMAIL = 'utmpadel@studentorg.utoronto.ca';
   var MAILTO = 'mailto:' + EMAIL + '?subject=UTM%20Padel%20Sponsorship';
 
@@ -77,10 +80,6 @@
 
   var body = document.getElementById('compareBody');
   CATEGORIES.forEach(function(cat){
-    var catRow = document.createElement('tr');
-    catRow.className = 'cat-row';
-    catRow.innerHTML = '<th colspan="6">' + cat.label + '</th>';
-    body.appendChild(catRow);
     cat.rows.forEach(function(row){
       var tr = document.createElement('tr');
       var rowLabel = document.createElement('th');
@@ -201,8 +200,16 @@
       headers:{ 'Content-Type':'application/json', 'Accept':'application/json' },
       body: JSON.stringify(payload)
     }).then(function(res){
-      if(!res.ok) throw new Error('Request failed');
-      return res.json();
+      // FormSubmit answers 200 even when the recipient/domain pair is not yet
+      // activated, so HTTP status alone is not proof of delivery. Only an
+      // explicit success flag counts; anything else falls through to the
+      // "email us directly" path. success is a string in their API.
+      return res.json().catch(function(){ return {}; }).then(function(data){
+        if(!res.ok || String(data.success) !== 'true'){
+          throw new Error(data.message || 'Request failed');
+        }
+        return data;
+      });
     }).then(function(){
       partnerForm.reset();
       formStatus.textContent = "Thanks — we'll reply within 48 hours.";

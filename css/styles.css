@@ -742,18 +742,9 @@ table.compare tbody td{
 }
 table.compare tbody td.col-active{background:var(--blue-50);}
 table.compare tbody td.col-active.is-platinum{background:#F8FAE9;}
-table.compare .cat-row td, table.compare .cat-row th{
-  background:var(--ink);
-  color:var(--white);
-  font-family:var(--font-mono);
-  font-size:11px;
-  letter-spacing:0.1em;
-  text-transform:uppercase;
-  padding:9px 18px;
-}
-table.compare .yes{color:var(--blue-700); font-weight:700;}
-table.compare td.col-active .yes{color:var(--blue-900);}
-table.compare td.col-active.is-platinum .yes{color:var(--green-dark);}
+table.compare .yes{color:var(--ink-soft);}
+table.compare td.col-active .yes{color:var(--blue-900); font-weight:600;}
+table.compare td.col-active.is-platinum .yes{color:var(--green-dark); font-weight:600;}
 
 .compare-pager{
   display:flex;
