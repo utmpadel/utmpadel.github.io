@@ -989,9 +989,10 @@ table.compare td.col-active.is-platinum .yes{color:var(--green-dark);}
   justify-content:space-between;
   align-items:baseline;
   gap:12px;
-  margin-bottom:12px;
+  margin-bottom:16px;
   flex-wrap:wrap;
 }
+.ig-panel .ig-panel-head{margin-bottom:12px;}
 .ig-panel-head span{
   font-family:var(--font-mono);
   font-size:11px;
