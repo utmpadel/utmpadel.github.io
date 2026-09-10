@@ -222,7 +222,7 @@
     margin:0 auto;
     padding:0 28px;
     display:grid;
-    grid-template-columns:repeat(4,1fr);
+    grid-template-columns:repeat(5,1fr);
   }
   .stat{
     padding:34px 22px;
@@ -626,6 +626,156 @@
     max-width:none;
   }
 
+  /* ---------- PARTNER FORM ---------- */
+  .contact-section{
+    background:var(--blue-50);
+    border-bottom:1px solid var(--line);
+    scroll-margin-top:80px;
+  }
+  .contact-grid{
+    display:grid;
+    grid-template-columns:1fr 1.15fr;
+    gap:56px;
+    align-items:start;
+  }
+  .contact-intro h2{
+    font-family:var(--font-display);
+    font-weight:400;
+    font-size:clamp(32px,4.5vw,52px);
+    line-height:1.02;
+    margin:6px 0 20px;
+    color:var(--ink);
+  }
+  .contact-intro p{
+    color:var(--ink-soft);
+    font-size:15.5px;
+    line-height:1.7;
+    margin:0 0 18px;
+    max-width:440px;
+  }
+  .contact-intro .contact-alt{
+    font-family:var(--font-mono);
+    font-size:12.5px;
+    letter-spacing:0.02em;
+  }
+  .contact-intro .contact-alt a{
+    color:var(--blue-700);
+    font-weight:700;
+    text-decoration:none;
+    border-bottom:1px solid var(--blue-200);
+  }
+  .contact-intro .contact-alt a:hover{color:var(--blue-900); border-color:var(--blue-500);}
+  .dotgrid-static{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:4px;
+    width:74px;
+    margin-bottom:24px;
+  }
+  .dotgrid-static i{
+    width:10px;
+    height:10px;
+    border-radius:50%;
+    border:1.5px solid var(--blue-200);
+    background:transparent;
+  }
+  .dotgrid-static i.filled{
+    background:var(--blue-500);
+    border-color:var(--blue-500);
+  }
+  .form-card{
+    background:var(--white);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+    padding:30px;
+  }
+  .form-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:16px;
+  }
+  .field{display:flex; flex-direction:column; gap:7px;}
+  .field.full{grid-column:1 / -1;}
+  .field label{
+    font-family:var(--font-mono);
+    font-size:11px;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+  }
+  .field label .req{color:var(--green-dark);}
+  .field label .opt{
+    text-transform:none;
+    letter-spacing:0.02em;
+    color:#8AA5B2;
+  }
+  .field input,
+  .field select,
+  .field textarea{
+    font-family:var(--font-body);
+    font-size:16px;
+    line-height:1.4;
+    color:var(--ink);
+    background:var(--white);
+    border:1.5px solid var(--line);
+    border-radius:10px;
+    padding:12px 14px;
+    min-height:48px;
+    width:100%;
+    transition:border-color .15s ease, box-shadow .15s ease;
+  }
+  .field select{
+    -webkit-appearance:none;
+    appearance:none;
+    background-image:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='12'%20height='8'%20viewBox='0%200%2012%208'%3E%3Cpath%20d='M1%201l5%205%205-5'%20fill='none'%20stroke='%234C6472'%20stroke-width='2'%20stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat:no-repeat;
+    background-position:right 14px center;
+    background-size:12px;
+    padding-right:38px;
+  }
+  .field textarea{min-height:120px; resize:vertical;}
+  .field input:focus,
+  .field select:focus,
+  .field textarea:focus{
+    outline:none;
+    border-color:var(--blue-700);
+    box-shadow:0 0 0 3px var(--blue-100);
+  }
+  .field input::placeholder,
+  .field textarea::placeholder{color:#8AA5B2;}
+  .form-foot{margin-top:20px;}
+  .btn[disabled]{opacity:0.55; cursor:default;}
+  .btn[disabled]:hover{transform:none; background:var(--blue-700); border-color:var(--blue-700);}
+  .form-status{
+    display:none;
+    font-size:14.5px;
+    line-height:1.55;
+    border-radius:10px;
+    padding:13px 16px;
+    margin:18px 0 0;
+  }
+  .form-status.show{display:block;}
+  .form-status.success{
+    background:#F8FAE9;
+    border:1px solid var(--green-dark);
+    color:var(--ink);
+  }
+  .form-status.error{
+    background:#FDF1EC;
+    border:1px solid #D2673F;
+    color:#7C3A1D;
+  }
+  .form-status a{color:inherit; font-weight:700;}
+  .hp{
+    position:absolute !important;
+    left:-9999px !important;
+    top:-9999px !important;
+    width:1px;
+    height:1px;
+    overflow:hidden;
+  }
+
   /* ---------- CONTACT / FOOTER ---------- */
   footer.site{
     background:var(--ink);
@@ -697,9 +847,11 @@
   /* ---------- RESPONSIVE ---------- */
   @media (max-width: 980px){
     .stats-inner{grid-template-columns:repeat(2,1fr);}
-    .stat:nth-child(3){border-left:none;}
+    .stat:nth-child(odd){border-left:none;}
     .why-grid{grid-template-columns:1fr;}
     .tiers-grid{grid-template-columns:repeat(3,1fr);}
+    .contact-grid{grid-template-columns:1fr; gap:40px;}
+    .contact-intro p{max-width:560px;}
   }
   @media (max-width: 640px){
     .site-inner{padding:12px 18px;}
@@ -715,6 +867,9 @@
     .tier-card{-webkit-tap-highlight-color:transparent;}
     .footer-top{flex-direction:column;}
     .footer-links .btn{width:100%; justify-content:center;}
+    .form-grid{grid-template-columns:1fr;}
+    .form-card{padding:24px 18px;}
+    .form-foot .btn{width:100%; justify-content:center;}
     .selectbar-inner{padding:14px 18px; gap:10px 14px;}
     .selectbar-tier{font-size:19px; margin-left:8px;}
     .selectbar-inner .btn{width:100%; justify-content:center; padding-top:13px; padding-bottom:13px;}
@@ -762,8 +917,12 @@
       <div class="cap">University padel club in all of Canada</div>
     </div>
     <div class="stat">
-      <div class="num">300</div>
-      <div class="cap">Instagram followers, 100% organic, all UTM students</div>
+      <div class="num">11K+</div>
+      <div class="cap">Views in our best month — event recaps, 100% organic</div>
+    </div>
+    <div class="stat">
+      <div class="num">300+</div>
+      <div class="cap">Link clicks driving event signups</div>
     </div>
     <div class="stat">
       <div class="num">60</div>
@@ -775,7 +934,7 @@
 <div class="ribbon">
   <div class="ribbon-inner">
     <span class="ribbon-tag">New · May 2026</span>
-    <span>CUPL — the league our competitive team plays in — was officially recognized by the Padel Association of Canada, the sport's national governing body, as the country's leading collegiate padel movement.</span>
+    <span>The Canadian Universities Padel League (CUPL) — the league our competitive team plays in — was officially recognized by the Padel Association of Canada, the sport's national governing body, as the country's leading collegiate padel movement.</span>
   </div>
 </div>
 
@@ -829,7 +988,7 @@
       <div>
         <span class="eyebrow" style="color:var(--green);">Why sponsor us</span>
         <h2>Small club.<br>Real, organic reach.</h2>
-        <p>No bots, no paid follower growth — every one of our 300 Instagram followers is a UTM student who found us on their own. Brands have already reached out to us directly. Season 2 means bigger flagship events, socials every two weeks, and cross-university collabs across Ontario.</p>
+        <p>No bots, no paid growth — every one of our 300 Instagram followers is a real UTM student who found us on their own, and our content reaches far beyond them: production-quality event recap videos, months with 11K+ views, and 300+ link clicks driving event signups. Brands have already reached out to us directly. Season 2 means bigger flagship events, socials every two weeks, and cross-university collabs across Ontario.</p>
       </div>
       <div class="why-list">
         <div class="why-item">
@@ -838,7 +997,7 @@
         </div>
         <div class="why-item">
           <span class="tag">Competitive credibility</span>
-          <p>8 players competing in CUPL, Canada's officially recognized university padel league. Our President also serves as CUPL's Head of Operations for Toronto.</p>
+          <p>8 players competing in the Canadian Universities Padel League (CUPL), Canada's officially recognized university padel league. Our President also serves as CUPL's Head of Operations for Toronto.</p>
         </div>
         <div class="why-item">
           <span class="tag">Growth story</span>
@@ -849,7 +1008,66 @@
   </div>
 </section>
 
-<footer class="site" id="contact">
+<section class="section contact-section" id="contact">
+  <div class="wrap">
+    <div class="contact-grid">
+      <div class="contact-intro">
+        <div class="dotgrid-static" aria-hidden="true">
+          <i></i><i></i><i></i><i></i><i></i>
+          <i></i><i></i><i class="filled"></i><i></i><i></i>
+          <i class="filled"></i><i class="filled"></i><i></i><i></i><i></i>
+        </div>
+        <span class="eyebrow">Partner with us</span>
+        <h2>Let's talk partnership.</h2>
+        <p>Tell us about your brand, the tier you're considering, and what you'd like to contribute — cash, prizes, vouchers, gear, or a mix. We reply to every inquiry within a few days.</p>
+        <p class="contact-alt">Prefer email or a DM? <a href="mailto:utmpadel@gmail.com">utmpadel@gmail.com</a> · <a href="https://instagram.com/utmpadel" target="_blank" rel="noopener">@utmpadel</a></p>
+      </div>
+      <form class="form-card" id="partnerForm" action="https://formsubmit.co/utmpadel@gmail.com" method="POST">
+        <div class="form-grid">
+          <div class="field">
+            <label for="f-name">Name <span class="req">*</span></label>
+            <input id="f-name" name="name" type="text" required autocomplete="name" placeholder="Your name">
+          </div>
+          <div class="field">
+            <label for="f-brand">Brand / organization <span class="req">*</span></label>
+            <input id="f-brand" name="brand" type="text" required autocomplete="organization" placeholder="e.g. Courtside Coffee Co.">
+          </div>
+          <div class="field">
+            <label for="f-email">Email <span class="req">*</span></label>
+            <input id="f-email" name="email" type="email" required autocomplete="email" placeholder="you@brand.com">
+          </div>
+          <div class="field">
+            <label for="f-tier">Tier of interest</label>
+            <select id="f-tier" name="tier">
+              <option value="" disabled selected>Select a tier…</option>
+              <option value="Supporter (In-Kind)">Supporter (In-Kind)</option>
+              <option value="Bronze — $250">Bronze — $250</option>
+              <option value="Silver — $600">Silver — $600</option>
+              <option value="Gold — $1,250">Gold — $1,250</option>
+              <option value="Platinum — $2,500">Platinum — $2,500</option>
+              <option value="Not sure yet">Not sure yet</option>
+            </select>
+          </div>
+          <div class="field full">
+            <label for="f-message">Message <span class="opt">(optional)</span></label>
+            <textarea id="f-message" name="message" placeholder="What would you like to sponsor — cash, prizes, vouchers, gear?"></textarea>
+          </div>
+        </div>
+        <input type="hidden" name="_subject" value="UTM Padel — New partnership inquiry">
+        <input type="hidden" name="_template" value="table">
+        <div class="hp" aria-hidden="true">
+          <label>Leave this field empty <input type="text" name="_honey" tabindex="-1" autocomplete="off"></label>
+        </div>
+        <div class="form-foot">
+          <button type="submit" class="btn" id="partnerSubmit">Send inquiry</button>
+        </div>
+        <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer class="site">
   <div class="wrap">
     <div class="footer-top">
       <div class="footer-brand">
@@ -878,7 +1096,7 @@
 <div class="selectbar" id="selectbar">
   <div class="selectbar-inner">
     <div><span class="selectbar-label">Selected tier</span><span class="selectbar-tier" id="selectbarTier">—</span></div>
-    <a href="#contact" class="btn on-dark">Get in touch about this tier</a>
+    <a href="#contact" class="btn on-dark" id="selectbarCta">Get in touch about this tier</a>
   </div>
 </div>
 
@@ -1015,6 +1233,57 @@
   });
   colHeaders.forEach(function(th){
     th.addEventListener('click', function(){ applySelection(th.getAttribute('data-tier')); });
+  });
+
+  // ---- partner form: preselect tier from selectbar CTA ----
+  var tierSelect = document.getElementById('f-tier');
+  var TIER_OPTION = {
+    supporter:'Supporter (In-Kind)',
+    bronze:'Bronze — $250',
+    silver:'Silver — $600',
+    gold:'Gold — $1,250',
+    platinum:'Platinum — $2,500'
+  };
+  document.getElementById('selectbarCta').addEventListener('click', function(){
+    if(selected && TIER_OPTION[selected]){ tierSelect.value = TIER_OPTION[selected]; }
+  });
+
+  // ---- partner form: submit via FormSubmit AJAX (no page navigation) ----
+  var partnerForm = document.getElementById('partnerForm');
+  var formStatus = document.getElementById('formStatus');
+  var partnerSubmit = document.getElementById('partnerSubmit');
+
+  partnerForm.addEventListener('submit', function(e){
+    e.preventDefault();
+    if(partnerSubmit.disabled) return;
+    partnerSubmit.disabled = true;
+    partnerSubmit.textContent = 'Sending…';
+    formStatus.className = 'form-status';
+    formStatus.textContent = '';
+
+    var payload = {};
+    new FormData(partnerForm).forEach(function(v, k){ payload[k] = v; });
+    if(!payload.tier) payload.tier = 'Not sure yet';
+
+    fetch('https://formsubmit.co/ajax/utmpadel@gmail.com', {
+      method:'POST',
+      headers:{ 'Content-Type':'application/json', 'Accept':'application/json' },
+      body: JSON.stringify(payload)
+    }).then(function(res){
+      if(!res.ok) throw new Error('Request failed');
+      return res.json();
+    }).then(function(){
+      partnerForm.reset();
+      formStatus.textContent = "Thanks — we'll get back to you within a few days.";
+      formStatus.className = 'form-status show success';
+      partnerSubmit.disabled = false;
+      partnerSubmit.textContent = 'Send inquiry';
+    }).catch(function(){
+      formStatus.innerHTML = 'Something went wrong sending that — please email us directly at <a href="mailto:utmpadel@gmail.com?subject=UTM%20Padel%20Sponsorship">utmpadel@gmail.com</a> and we\'ll take it from there.';
+      formStatus.className = 'form-status show error';
+      partnerSubmit.disabled = false;
+      partnerSubmit.textContent = 'Send inquiry';
+    });
   });
 
   // ---- hero dot field ----
